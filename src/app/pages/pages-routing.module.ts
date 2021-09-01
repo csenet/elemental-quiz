@@ -19,6 +19,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./hoge/hoge.module').then((m) => m.HogeModule),
       },
+      {
+        path: 'show',
+        loadChildren: () =>
+          import('./question-show/question-show.module').then((m) => m.QuestionShowModule)
+      }
     ]
   }
 ];

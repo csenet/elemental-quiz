@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { PagesComponent } from './pages.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,13 +13,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavComponent } from './shared/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
+import { QuestionShowComponent } from './question-show/question-show.component';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
     HogeComponent,
-    NavComponent
+    NavComponent,
+    QuestionShowComponent
   ],
   imports: [
     PagesRoutingModule,
@@ -30,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule,
     LayoutModule,
     MatButtonModule,
+    ReactiveFormsModule,
   ],
 })
 export class PagesModule { }
