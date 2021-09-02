@@ -1,8 +1,10 @@
+
+import { ConfirmService } from 'src/app/shared/modal/confirm/confirm.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { DataService } from 'src/shared/data.service';
-import { ElementData } from 'src/shared/ElementData';
+import { DataService } from 'src/app/shared/data.service';
+import { ElementData } from 'src/app/shared/ElementData';
 
 @Component({
   selector: 'app-question-show',
@@ -11,18 +13,26 @@ import { ElementData } from 'src/shared/ElementData';
 })
 export class QuestionShowComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private dataService: DataService) { }
+  constructor(private fb: FormBuilder, private dataService: DataService, private confirmService: ConfirmService) { }
 
   form!: FormGroup
   whichToAsk: string = "名前"
-  count: number = 1
+  count: number = 0
+  score: number = 0
 
-  selections!: string[]
+  selections: string[] = ["", "", "", ""]
 
   data!: ElementData[]
 
+  answer!: string
+
+  maxQurstion: number = 5 //出題される問題数
+
+  isResult: boolean = false
+
+  result: string = ""
+
   ngOnInit(): void {
-    this.addTestData()
     this.buildForm()
     this.getData()
   }
@@ -52,10 +62,6 @@ export class QuestionShowComponent implements OnInit {
     })
   }
 
-  private addTestData(): void {
-    this.selections = ["あ", "い", "う", "え"]
-  }
-
   private getRandomNumber(min: number, max: number) {
     return (Math.floor(Math.random() * (max + 1 - min)) + min)
   }
@@ -68,19 +74,33 @@ export class QuestionShowComponent implements OnInit {
     return this.data[questionIndex]
   }
 
+  shuffle = ([...array]) => {
+    for (let i = array.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   private setSelections(questionIndex: number, nq: number): void {
     /* 以下は選択肢を決定するためのもの */
     this.selections = []
-    this.selections.push(this.data[questionIndex].name)
+    const answer = this.data[questionIndex].name
+    this.selections.push(answer)
+    this.answer = answer
     while (this.selections.length < 4) {
       const randomIndex = this.getRandomNumber(0, nq - 1)
-      console.log(randomIndex)
-      if (randomIndex === questionIndex) continue;
+      if (randomIndex == questionIndex) continue;
       this.selections.push(this.data[randomIndex].name)
     }
+    this.selections = this.shuffle(this.selections)
   }
 
   private setQuestion() {
+    if (this.count >= this.maxQurstion) {
+      this.showResult();
+      return
+    }
     const question: ElementData = this.selectQuestion()
     this.form.patchValue({
       number: question.no,
@@ -92,6 +112,25 @@ export class QuestionShowComponent implements OnInit {
       mt: question.mt,
       bp: question.bp
     })
+    this.count++;
+  }
+
+  private showResult() {
+    this.isResult = true
+    this.result = `${this.score}/${this.maxQurstion}`
+  }
+
+  public async register(selected: string) {
+    // 正解と比較
+    if (selected === this.answer) {
+      // 正解
+      this.score++;
+      await this.confirmService.show(true)
+    } else {
+      // 不正解
+      await this.confirmService.show(false);
+    }
+    this.setQuestion()
   }
 
 }

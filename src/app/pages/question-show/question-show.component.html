@@ -1,54 +1,69 @@
-<div class="display-6 text-center">Q{{count}}. この原子の{{whichToAsk}}は?</div>
-<img src="assets/img/question-mark.svg" class="mx-auto d-block p-5" height="300" width="300">
-<form [formGroup]="form">
-  <div class="row">
-    <div class="col-12 col-md-6">
-      <div class="mb-3 row">
-        <label for="no" class="col-sm-3 col-form-label-lg">原子番号</label>
-        <div class="col-sm-9">
-          <input type="text" readonly class="form-control form-control-lg" id="no" formControlName="number">
+<!-- 出題画面 -->
+<ng-container *ngIf="!isResult;">
+  <div class="display-6 text-center">Q{{count}}/{{maxQurstion}} この原子の{{whichToAsk}}は?</div>
+  <img src="assets/img/question-mark.svg" class="mx-auto d-block p-5" height="300" width="300">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3 row">
+          <label for="no" class="col-sm-3 col-form-label-lg">原子番号</label>
+          <div class="col-sm-9">
+            <input type="text" readonly class="form-control form-control-lg" id="no" formControlName="number">
+          </div>
         </div>
-      </div>
-      <!-- <div class="mb-3 row">
+        <!-- <div class="mb-3 row">
         <label for="mp" class="col-sm-3 col-form-label-lg">融点℃</label>
         <div class="col-sm-9">
           <input type="text" readonly class="form-control form-control-lg" id="mt" value="4">
         </div>
       </div> -->
-    </div>
-    <div class="col-12 col-md-6">
-      <div class="mb-3 row">
-        <label for="state" class="col-sm-3 col-form-label-lg">標準状態</label>
-        <div class="col-sm-9">
-          <input type="text" readonly class="form-control form-control-lg" id="state" formControlName="state">
-        </div>
       </div>
-      <!-- <div class="mb-3 row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3 row">
+          <label for="state" class="col-sm-3 col-form-label-lg">標準状態</label>
+          <div class="col-sm-9">
+            <input type="text" readonly class="form-control form-control-lg" id="state" formControlName="state">
+          </div>
+        </div>
+        <!-- <div class="mb-3 row">
         <label for="bp" class="col-sm-3 col-form-label-lg">沸点℃</label>
         <div class="col-sm-9">
           <input type="text" readonly class="form-control form-control-lg" id="bp" value="4">
         </div>
       </div> -->
+      </div>
     </div>
-  </div>
 
-  <div class="mb-3 row">
-    <label for="use" class="col-sm-1 col-form-label-lg">用途</label>
-    <div class="col-sm-11">
-      <input type="text" readonly class="form-control form-control-lg" id="use" formControlName="use">
+    <div class="mb-3 row">
+      <label for="use" class="col-sm-1 col-form-label-lg">用途</label>
+      <div class="col-sm-11">
+        <input type="text" readonly class="form-control form-control-lg" id="use" formControlName="use">
+      </div>
     </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="description" class="col-sm-1 col-form-label-lg">説明</label>
-    <div class="col-sm-11">
-      <textarea readonly class="form-control form-control-lg" id="description" formControlName="description"></textarea>
+    <div class="mb-3 row">
+      <label for="description" class="col-sm-1 col-form-label-lg">説明</label>
+      <div class="col-sm-11">
+        <textarea readonly class="form-control form-control-lg" id="description"
+          formControlName="description"></textarea>
+      </div>
     </div>
-  </div>
 
-</form>
-<div class="d-flex mr-auto">
-  <button type="button" class="btn btn-primary btn-lg selection">{{selections[0]}}</button>
-  <button type="button" class="btn btn-success btn-lg selection">{{selections[1]}}</button>
-  <button type="button" class="btn btn-warning btn-lg selection">{{selections[2]}}</button>
-  <button type="button" class="btn btn-danger btn-lg selection">{{selections[3]}}</button>
-</div>
+  </form>
+  <div class="d-flex mr-auto">
+    <button type="button" class="btn btn-primary btn-lg selection"
+      (click)="register(selections[0])">{{selections[0]}}</button>
+    <button type=" button" class="btn btn-success btn-lg selection"
+      (click)="register(selections[1])">{{selections[1]}}</button>
+    <button type="button" class="btn btn-warning btn-lg selection"
+      (click)="register(selections[2])">{{selections[2]}}</button>
+    <button type="button" class="btn btn-danger btn-lg selection"
+      (click)="register(selections[3])">{{selections[3]}}</button>
+  </div>
+</ng-container>
+<ng-container *ngIf="isResult">
+  <!-- 結果画面 -->
+  <div class="text-center">
+    <h1 class="title">結果発表</h1>
+    <h1 class="result">{{result}}</h1>
+  </div>
+</ng-container>
