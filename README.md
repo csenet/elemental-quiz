@@ -1,27 +1,29 @@
-# AngularWebSample
+# elemental-quiz
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.
+このプロジェクトは、[Angular CLI](https://github.com/angular/angular-cli)バージョン12.2.3で生成されました。
 
-## Development server
+## 開発サーバー
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+開発用のサーバーとして、`ng serve`を実行します。http://localhost:4200/` にナビゲートしてください。いずれかのソースファイルを変更すると、アプリは自動的にリロードされます。
 
-## Code scaffolding
+## コード・スカフォールド
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ng generate component component-name` を実行して、新しいコンポーネントを生成します。また、`ng generate directive|pipe|service|class|guard|interface|enum|module`を使うこともできます。
 
-## Build
+## ビルド
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+ng build`を実行して、プロジェクトをビルドします。ビルドの成果物は `dist/` ディレクトリに保存されます。
 
-## Running unit tests
+## ユニットテストの実行
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Karma](https://karma-runner.github.io)経由でユニットテストを実行するには、`ng test`を実行する。
 
-## Running end-to-end tests
+## エンド・ツー・エンドテストの実行
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+ng e2e`を実行して、任意のプラットフォームを介してエンドツーエンドテストを実行する。このコマンドを使用するには、まずエンドツーエンドのテスト機能を実装したパッケージを追加する必要があります。
 
-## Further help
+## さらなるヘルプ
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Angular CLIの詳細については、`ng help`を使用するか、[Angular CLI Overview and Command Reference](https://angular.io/cli)のページを確認してください。
+
+www.DeepL.com/Translator（無料版）で翻訳しました。
